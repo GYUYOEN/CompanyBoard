@@ -58,7 +58,6 @@ newMake();
 
 // 룰렛 돌리기
 const rotate = () => {
-    newMake();
     // 룰렛 당첨 결정
     // 랜덤 한 난수를 얻을 수 있음. 해당 수에 항목의 개수를 곱해주면 랜덤한 당첨 결과를 얻을 수 있음.
     const ran = Math.floor(Math.random() * product.length);
@@ -66,9 +65,13 @@ const rotate = () => {
     // 랜덤한 결과 값에 영역의 크기를 곱해서 룰렛의 위치를 맞추어 주고, 360도룰 10번 돌라는 의미의 3600을 추가로 더해줌.
     // 추가로 오차범위를 조정하기 위해서 (arc * 3)의 수식을 추가로 사용
     const arc = 360 / product.length;
-    const rotate = (ran * arc) + 3600 + (arc * 3);
+    const rotate = (ran * arc) + 7200 + (arc * 3);
 
     canvas.style.transform = `rotate(-${rotate}deg)`;
 
-    setTimeout(() => alert(product[ran]), 2000);
+    setTimeout(() => {
+        if(!alert(product[ran])) {
+            location.reload()
+        }
+    },10000);
 };

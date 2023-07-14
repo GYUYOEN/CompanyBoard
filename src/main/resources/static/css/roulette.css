@@ -9,7 +9,7 @@ body {
 }
 
 canvas {
-    transition: 2s;
+    transition: 10s;
 }
 
 button {
