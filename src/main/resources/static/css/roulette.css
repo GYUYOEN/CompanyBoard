@@ -38,7 +38,7 @@ div {
     position: relative;
 }
 
-div::before {
+.canvas::before {
     content: "";
     position: absolute;
     width: 10px;
@@ -49,4 +49,13 @@ div::before {
     left: 50%;
     transform: translateX(-50%);
     z-index: 22;
+}
+
+.child {
+    /* 수평 중앙 정렬하기 */
+    margin: 0 auto;
+}
+
+.buttonMenu {
+    margin: 10px 10px;
 }
