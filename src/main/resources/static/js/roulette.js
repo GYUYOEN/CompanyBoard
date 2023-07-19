@@ -7,10 +7,117 @@ const product = [];
 // 각 항목에 대한 색상
 const colors = [];
 
+// 메뉴 추가
 function addMenu() {
     const menu = document.getElementById("inputMenu").value;
-    product.push(menu);
-    colors.push("#" + Math.round(Math.random() * 0xffffff).toString(16));
+
+    if(menu == "") {
+        alert("메뉴를 입력해주세요.")
+        return
+    }
+
+    let data = {
+        "menu" : menu
+    }
+
+    $.ajax({
+        url : "roulette/add",
+        type : "post",
+        data: data,
+        success : function (menu) {
+            if(menu == "fail") {
+                alert("중복된 메뉴가 존재합니다.");
+                return
+            }
+
+            $("#checkboxMenu").append("<div class='form-check'>" +
+                                        "<input class='form-check-input' name='menu' id='selectMenu' type='checkbox' value='" + menu + "'/>" +
+                                        "<label class='form-check-label fs-3' for='selectMenu' id='labelMenu'>" + menu + "</label>" +
+                                        "<div class='deleteMenu btn-group-sm'>" +
+                                            "<button class='btn btn-danger' id='buttonMenu' type='button' onclick='deleteMenu()'>제거</button>" +
+                                        "</div>" +
+                                      "</div>");
+
+
+        }
+    })
+}
+
+// 동적으로 생성한 html의 값
+$(document).on('click', 'input[name=menu]', function () {
+        const checkboxValue = $(this).val();
+        if($(this).is(":checked")) {
+            addMenuInRoulette(checkboxValue, true);
+        } else {
+            addMenuInRoulette(checkboxValue, false);
+            return;
+        }
+    }
+)
+
+// 메뉴 삭제
+function deleteMenu(element) {
+     const menu = element.parentElement.parentElement.children[1].firstChild.data;
+
+     console.log(menu)
+
+     let data = {
+         "menu" : menu
+     }
+
+     $.ajax({
+         url : "roulette/delete",
+         type: "delete",
+         data: data,
+         success : function (menu) {
+             alert(menu + "메뉴를 제거하였습니다.");
+             location.reload()
+         }
+
+     })
+ }
+
+$(document).on('click', '#buttonMenu', function () {
+    let menu = document.getElementById("inputMenu").value;
+
+    if(menu == "") {
+        deleteMenu($(this))
+        return
+    }
+
+    console.log(menu)
+
+    let data = {
+        "menu" : menu
+    }
+
+    $.ajax({
+        url : "roulette/delete",
+        type: "delete",
+        data: data,
+        success : function (menu) {
+            alert(menu + "메뉴를 제거하였습니다.");
+            location.reload()
+        }
+
+    })
+})
+
+
+function addMenuInRoulette(checkboxValue, isCheck) {
+    console.log(isCheck)
+
+    if(isCheck) {
+        product.push(checkboxValue);
+        colors.push("#" + Math.round(Math.random() * 0xffffff).toString(16));
+    } else {
+        for(let i = 0; i < product.length; i++) {
+            if(product[i] === checkboxValue) {
+                product.splice(i)
+                colors.splice(i);
+            }
+        }
+    }
 
     // 그려줄 캔버스의 중점 위치 구하기
     const newMake = () => {

@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping(value = "/roulette")
-    public String home() {
-        return "roulette.html";
-    }
-
     @GetMapping(value = "/index")
     public String index() {
         return "index.html";

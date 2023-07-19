@@ -12,7 +12,7 @@ canvas {
     transition: 10s;
 }
 
-button {
+.buttonRoulettue {
     background: #febf00;
     margin-top: 1rem;
     padding: .8rem 1.8rem;
@@ -24,17 +24,19 @@ button {
     cursor: pointer;
 }
 
-button:active {
+.buttonRoulettue:active {
     background: #444;
     color: #f9f9f9;
 }
 
-div {
-    width: 380px;
+.totalContainer {
+    width: 100%;
     overflow: hidden;
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
+}
+
+.canvas {
     position: relative;
 }
 
@@ -44,18 +46,45 @@ div {
     width: 10px;
     height: 50px;
     border-radius: 5px;
-    background: #000;
+    background: #febf00;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 22;
 }
 
-.child {
-    /* 수평 중앙 정렬하기 */
-    margin: 0 auto;
+.canvasContainer {
+    margin: 10px auto;
+}
+
+.menu {
+    float: left;
+    width: 40%;
+    margin-top: 5%;
+    border: solid gray;
+    padding: 30px;
+}
+
+.canvas {
+    float: right;
+    width: 40%;
+    text-align: center;
+}
+
+.inputAddMenu{
+    display: flex;
+}
+
+.inputMenu {
+    width: 120%;
+    margin-right: 5px;
 }
 
 .buttonMenu {
-    margin: 10px 10px;
+    width: 40%;
+    margin: 5px;
+}
+
+.deleteMenu {
+    float: right;
 }
