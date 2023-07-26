@@ -3,6 +3,8 @@ package com.gue.board.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.io.IOException;
+
 @Controller
 public class HomeController {
 
@@ -17,7 +19,10 @@ public class HomeController {
     }
 
     @GetMapping(value = "/board")
-    public String board() {
+    public String board() throws IOException {
+//        WeatherData weatherData = new WeatherData();
+//        weatherData.lookUpWeather();
+
         return "board.html";
     }
 }
